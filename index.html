@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pump it Pure — Core Prototype</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <h1>Welcome to the Charity Water Game Prototype</h1>
-    <script src="script.js"></script>
+  <header class="site-header">
+    <div class="brand-mark" aria-hidden="true">💧</div>
+    <h1>Pump it Pure</h1>
+  </header>
+
+  <main class="container">
+    <!-- HUD -->
+    <section class="hud" role="status" aria-live="polite">
+      <div class="hud-item">
+        <span class="label">Time</span>
+        <span id="time" class="value">45</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">Score</span>
+        <span id="score" class="value">0</span>
+      </div>
+      <button id="startBtn" class="btn btn-primary">Start</button>
+    </section>
+
+    <!-- Water meter -->
+    <section class="meter-wrap" aria-label="Water meter">
+      <div class="meter">
+        <div id="meterFill" class="meter-fill" style="width:0%"></div>
+      </div>
+      <div id="meterPct" class="meter-pct" aria-hidden="true">0%</div>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <button id="pumpBtn" class="btn btn-pump" disabled>
+        Pump
+      </button>
+      <button id="purifyBtn" class="btn btn-purify" disabled>
+        Purify
+      </button>
+      <span id="statusBadge" class="status safe">Water: Clean</span>
+    </section>
+
+    <!-- Result / Replay -->
+    <section id="resultPanel" class="result hidden" aria-live="polite">
+      <p id="resultMsg"></p>
+      <button id="replayBtn" class="btn">Replay</button>
+    </section>
+
+    <footer class="site-footer">
+      <small>
+        Inspired by <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer">charity: water</a>
+      </small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
