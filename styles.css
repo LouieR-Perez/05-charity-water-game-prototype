@@ -147,17 +147,25 @@ body{
 .meter{
   flex:1;
   height:22px;
-  background:#f3f5f7;
-  border:1px solid #e7e7e7;
+  background:#dbeefe; /* slightly bluer for seamless ends */
   border-radius:999px;
   overflow:hidden;
-  box-shadow:inset 0 1px 3px rgba(0,0,0,.06);
+  position:relative;
+  /* Remove border to avoid inner gaps; use subtle inset shadow instead */
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), inset 0 1px 3px rgba(0,0,0,.08);
 }
 .meter-fill{
+  position:absolute;
+  left:0;
+  top:0;
   height:100%;
   width:0%;
-  background:linear-gradient(90deg, var(--cw-blue), #79c6ff);
+  background:linear-gradient(90deg, var(--cw-blue) 0%, #79c6ff 100%);
   transition:width .15s ease;
+}
+/* Optional full state if we want to highlight completion later */
+.meter-full .meter-fill{
+  filter:brightness(1.05);
 }
 .meter-pct{
   min-width:3ch;

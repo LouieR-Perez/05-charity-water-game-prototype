@@ -35,9 +35,11 @@ let PUMP_GAIN = 4;                    // % gained per pump tap (will be recalcul
 const SUCCESS_THRESHOLD = 100;        // always fill meter to 100%
 const CONTAM_MIN_DELAY_MS = 900;      // earliest next contamination
 const CONTAM_MAX_DELAY_MS = 2500;     // latest next contamination
+const PUMP_PENALTY = 1;               // points lost if player pumps while contaminated (obstacle)
 
 function setProgress(next){
   progress = Math.max(0, Math.min(100, next));
+  // With absolute positioned fill we can use exact percentage.
   meterFill.style.width = `${progress}%`;
   meterPctEl.textContent = `${Math.round(progress)}%`;
 }
@@ -176,6 +178,12 @@ function handlePump(){
     // We add the 'shake' class briefly so the player learns they must Purify first.
     pumpBtn.classList.add('shake');
     setTimeout(() => pumpBtn.classList.remove('shake'), 350);
+  // Penalty: lose points for ignoring contamination.
+  // setScore() already prevents negative numbers so score will not go below 0.
+    setScore(score - PUMP_PENALTY);
+    // Also reduce progress by the same amount a successful pump would have added.
+    // This mirrors a "lost" pump. setProgress() clamps at 0.
+    setProgress(progress - PUMP_GAIN);
     return;
   }
 
