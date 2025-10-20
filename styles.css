@@ -277,3 +277,24 @@ body{
 .c-yellow{ background:var(--cw-yellow); }
 .c-green{ background:var(--cw-green); }
 .c-red{ background:var(--cw-red); }
+
+/* Modal buttons: restore clearer contrast (our global .btn style was overriding Bootstrap defaults) */
+.modal .btn{
+  border-radius:.55rem; /* slightly rounded but not full pill */
+  font-weight:600;
+  background:inherit; /* allow specific classes below to set color */
+}
+.modal .btn.btn-secondary{
+  background:#e5e7ea;
+  color:#222;
+}
+.modal .btn.btn-secondary:hover{
+  background:#d6d9dc;
+}
+.modal .btn.btn-danger{
+  background:var(--cw-red);
+  color:#fff;
+}
+.modal .btn.btn-danger:hover{
+  filter:brightness(1.1);
+}
