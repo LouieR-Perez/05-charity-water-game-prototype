@@ -178,6 +178,7 @@ body{
   display:flex; /* Works with Bootstrap row columns */
   flex-wrap:wrap;
   align-items:center;
+  justify-content:center; /* Center Pump, Purify, and status badge */
   gap:.75rem;
   margin:.5rem 0 0;
 }
@@ -240,6 +241,18 @@ body{
 .site-footer a{
   color:#0f6bd6;
   text-decoration:none;
+}
+
+/* Footer logo now displayed below attribution */
+.footer-logo{
+  margin-top:.35rem;
+  display:flex;
+  justify-content:center;
+}
+.footer-logo img{
+  height:42px;
+  width:auto;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.25));
 }
 
 /* Responsive tweaks */
