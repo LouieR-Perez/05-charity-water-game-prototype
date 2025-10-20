@@ -138,6 +138,7 @@ function endGame(won){
   const success = won || progress >= SUCCESS_THRESHOLD;
   if (success){
     resultMsg.textContent = `Great job! You filled the meter to ${Math.round(progress)}% and scored ${score}.`;
+    launchConfetti(); // celebration effect
   } else {
     resultMsg.textContent = `Time's up! You reached ${Math.round(progress)}% with a score of ${score}. Try again!`;
   }
@@ -245,3 +246,38 @@ purifyBtn.addEventListener('keydown', (e) => {
 });
 
 console.log('Pump it Pure — pump/purify prototype loaded.');
+
+// Simple DOM confetti (no external libraries). Creates colored pieces that fall then cleans up.
+function launchConfetti(){
+  const colors = ['c-yellow','c-green','c-red'];
+  const total = 40; // number of pieces
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+
+  for (let i=0;i<total;i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti';
+    // Random color (blue base plus one modifier about half the time)
+    if (Math.random() < 0.6){
+      piece.classList.add(colors[randInt(0, colors.length-1)]);
+    }
+    // Random horizontal position
+    piece.style.left = Math.random() * 100 + 'vw';
+    // Random delay & duration for variation
+    const duration = 3 + Math.random()*2; // 3-5s
+    const delay = Math.random()*0.6;      // up to 0.6s start delay
+    piece.style.animationDuration = duration + 's';
+    piece.style.animationDelay = delay + 's';
+    // Slight random size variation
+    piece.style.width = (8 + Math.random()*6) + 'px';
+    piece.style.height = (10 + Math.random()*8) + 'px';
+    container.appendChild(piece);
+  }
+
+  // Cleanup: remove container after longest possible animation ends
+  const maxTime = 6000; // slightly more than 5s to be safe
+  setTimeout(() => {
+    container.remove();
+  }, maxTime);
+}

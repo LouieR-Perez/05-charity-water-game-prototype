@@ -57,6 +57,7 @@ body{
   display:flex;
   flex-wrap:wrap;
   align-items:center;
+  justify-content:center; /* Center time, score, start/reset buttons */
   gap:1rem;
   background:var(--panel);
   border:1px solid #eee;
@@ -247,3 +248,32 @@ body{
   #statusBadge{ width:100%; }
   .result{ flex-direction:column; align-items:stretch; }
 }
+
+/* Confetti celebration (vanilla, no canvas) */
+.confetti-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:999;
+}
+.confetti{
+  position:absolute;
+  width:10px;
+  height:14px;
+  background:var(--cw-blue);
+  top:-20px;
+  opacity:0.9;
+  transform:rotate(0deg);
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0.85;
+  }
+}
+/* Color modifiers */
+.c-yellow{ background:var(--cw-yellow); }
+.c-green{ background:var(--cw-green); }
+.c-red{ background:var(--cw-red); }
